@@ -1,0 +1,55 @@
+\documentclass[11pt]{cauchy}
+
+\usepackage{mlmodern}
+\usepackage{mathsphystools}
+\usepackage{thmstyles}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\tikzset{>=stealth}
+\tikzcdset{arrow style=tikz}
+
+\setlist[enumerate,1]{label=(\roman*)}
+\setlist[enumerate,2]{label=\alph*.}
+
+\title{Variational Principles}
+\subtitle{Lecture Notes}
+\author{Rashid M. Talha}
+\affiliation{School of Natural Sciences, NUST}
+\date{\today}
+\begin{document}
+
+\input{additional/fulltitle}
+
+\frontmatter
+\tableofcontents\clearpage
+
+\input{additional/abstract}
+
+\mainmatter
+\input{chapters/intro}
+\input{chapters/calc}
+\input{chapters/eulerlagrange}
+\input{chapters/coordinates}
+\input{chapters/hamilton}
+\input{chapters/symmetries}
+\input{chapters/constraints}
+\input{chapters/secondvariation}
+\input{chapters/classicalmech}
+\input{chapters/strum}
+
+\appendix
+\input{chapters/app-convex}
+\input{chapters/app-lagrange}
+\input{chapters/app-examples}
+
+\nocite{*}
+\clearpage
+{\small\bibliography{references}}
+
+% \backmatter
+% \input{additional/aboutauthor}
+
+\end{document}
