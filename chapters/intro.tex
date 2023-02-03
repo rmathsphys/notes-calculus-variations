@@ -1,27 +1,85 @@
 %!TEX root = ../main.tex
 \section{Introduction}
-Starting the topic with a standard functional, motivating the topic with many examples, aim of this text, roadmap of the things to come, things that are left out, recap of standard calculus (1D and ND), the fundamental theorem of calculus of variations.
+Suppose we want to find the total length of a curve $y=y(x)$ in $\R^2$, with $x \in [x_1,x_2]$, such that $y(x_1)=y_1$ and $y(x_2)=y_2$. The standard technique is to divide the curve into small line segments, each of length $dl$. Total length of $y$ is then
 \begin{equation}
-  I[f] = \int_{x_1}^{x_2} f(x,y(x),y'(x)) \d{x}.
+  L[y] = \int dl.
 \end{equation}
-This is a functional.
+Using Pythagoras' theorem, we can write $dl^2 = dx^2 + dy^2$. Moreover, $y = y(x)$ results in $dy = y'(x) dx$. The total length can, therefore, be expressed as
+\begin{equation}
+  \label{eq:func-length}
+  L[y] = \int_{x_1}^{x_2} \sqrt{1 + \left(y'(x)\right)^2} dx.
+\end{equation}
 
-\subsection{Functionals \& Variations}
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+The length $L$ will clearly depend on the given curve $y$, and the curve itself is a function of $x$. Therefore, $L$ can be treated as a function that maps a curve $y(x)$ to a real number $L[y]$. Such a map is called a functional, and it is the central object of study in the calculus of variations.
 
-\subsection{Examples of Variational Problems}
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Now, suppose that we are not given any specific curve, rather we are asked to find the function $y(x)$ that satisfies $y(x_1) = y_1$ and $y(x_2) = y_2$ which has the minimum length $L[y]$. In other words, we are asked to minimise the functional $L[\cdot]$.
 
-\subsection{Overview of these notes}
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+What do we \emph{want} the answer to be? Based on our previous knowledge (or geometric analysis) we know that the curve of shortest length between any two distinct points on a plane is a straight line. However, it turns out that our current formulation of the problem does \emph{not} give us this answer: the function
+\begin{equation}
+  y = \begin{cases}y_1, & x=x_1\\ y_2, & \text{otherwise}\end{cases}
+\end{equation}
+satisfies the requirements of the problem, and has length less than that of a straight line segment joining $(x_1, y_1)$ and $(x_2, y_2)$.
 
+So, we need to be improve our problem statement by adding more restrictions on $y$. We notice that the previous solution is discontinuous. So, we add the condition that $y$ needs to be at least continuous. However, this prevents us from using equation~\eqref{eq:func-length} to determine the length of the curve, since $y$ might not be differentiable. To remedy this, we require $y$ to be at least differentiable. (In fact, it turns out that we also need $y'(x)$ to be continuous, but we shall discuss such technicalities later in the course.)
+
+Overall, we see that the problem of finding a minimum (or maximum) of a functional involves more than just the statement of the functional: it also requires us specify the boundary conditions and the \emph{regularity} requirements, along with any other constraints. Similarly, there are several methods for finding the minimas and maximas that are applicable to specific functionals. In calculus of variations we approach this problem systematically by using the method of `varying the dependent function around a critical point' in order to obtain the desired solution. The complete problem statement along with the solution strategy is called a \emph{variational problem}.
+
+In the following sections, we will study some of the basic terminology that is used in variational problems.
+
+\subsection{Regularity Classes}
+Let $f:U \subseteq \R^n \to \R$ be a function. We take $U$ to be an open set of $\R^n$ in order to ignore the complications due to boundary points.
+
+\begin{ndfn}
+  A function $f:U \subseteq \R^n \to \R$ is called $k$-times differentiable if its $k$th derivative, $f^{(k)}$, exists.
+\end{ndfn}
+\begin{ndfn}[Continuously differentiable]
+  A function $f:U \subseteq \R^n \to \R$ is called $k$-times continuously differentiable if it is $k$-times differentiable and the $k$th derivative, $f^{(k)}$, is continuous.
+\end{ndfn}
+It is easy to check that if $f$ is $k$-times continuously differentiable then it is also $k-1$-times continuously differentiable, for $k \geq 1$. This follows from the fact that differentiability implies continuity, and that the existence of $f^{(k-1)}$ is a necessary condition for the existence of $f^{(k)}$.
+
+The set of all $k$-times continuously differentiable functions on a domain $U$ is denoted by $C^{k}(U)$. When the domain is clear from the context (or irrelevant) then we simply write $C^{k}$.
+\begin{equation}
+  C^{k}(U) = \set{f:U\subseteq\R^n \to \R \st f^{(k)}\text{ is continuous}}.
+\end{equation}
+$C^{0}$ denotes the set of all the continuous functions, and $C^{\infty}$ is the set of all such functions that can be differentiated infinitely many times.
+
+\begin{negg}
+  It is possible that a function $f$ is $k$-times differentiable, but that the $k$th derivative is \emph{not} differentiable. In that case $f \in C^{k-1}$ only. For example, let
+  \begin{equation}
+    f(x) = \begin{cases}
+    x^{k+2} \sin(\frac{1}{x}) & x \neq 0\\ 0 & x = 0,
+    \end{cases}
+  \end{equation}
+  for $k=0,1,2,\dots$. Then, $f$ is $k+1$ times differentiable (for all $x \in \R$), but the $(k+1)$th derivative is not continuous (at $x=0$). The regularity class of this function is, therefore, $C^{k}$; not $C^{k+1}$.
+\end{negg}
+
+Similarly, we have the following observation
+\begin{nprop}
+  For all positive integers $k$, $C^{k-1} \subsetneqq C^{k}$, and $C^{\infty} \subsetneqq C^{k}$.
+\end{nprop}
+\begin{proof}
+  TBC.
+\end{proof}
+
+\subsection{Functionals}
+As briefly mentioned earlier, a functional $I$ is simply a function whose input is itself a function $f$, and output, denoted $I[f]$, is a real number. In other words, a functional maps functions to real numbers,
+\begin{equation}
+  I:X\to\R, \qquad f \mapsto I[f]\in\R.
+\end{equation}
+Here, $X$ is a set of functions of some suitable regularity. For example, equation~\eqref{eq:func-length} gives a functional whose domain can be $C^1([\alpha,\beta])$.
+\begin{negg}
+All of the following are valid functionals:
 \begin{itemize}
-\item Introduce the calculus of variations and proof some standard results.
-\item Derive and use the Euler-Lagrange equations for various different types of Lagrangians.
-\item Explore the concept of symmetries, and study its relation to conservation laws; Noether's theorem.
-\item Establish a duality between differential equations and certain optimisation problems.
-\item Discuss constrained optimisation problems, along with several types of contraints.
-\item Discuss how modern theoretical physics is predominantly studied in terms of Lagrangians and Hamiltonians.
-\item Introduce classical mechanics in the framework of lagrangian mechanics; introduce Hamiltonian mechanics, and the concept of phase space, but not explore it is any detail.
-\item Apply variational techniques to domains other than physics; e.g. entropy minimisation in statistics.
+\item $I : C^0 \to \R$, with $I[f]=f(x_0)$ for some fixed $x_0 \in \R$.
+\item $I : C^0 \to \R$, with $I[f]=\int_{0}^{1} f(x)^2 \d x$.
+\item $I : C^2 \to \R$, with $I[f]=f''(x_0)$ for some fixed $x_0 \in \R$.
+\item $I : C^0 \to \R$, with $I[f]=\int_{0}^{1} f(x)^2 \sin(x^2) \d x / \int_{0}^{1} f(x) \d x$, where the denominator is non-vanishing.
 \end{itemize}
+\end{negg}
+
+Calculus of variations primarily focuses on functionals of the form
+\begin{equation}
+  I[y] = \int_{x_1}^{x_2} f\left(x, y(x), y'(x), \dots, y^{(k)}(x)\right) \d x,
+\end{equation}
+with $y \in C^{r}$ for some suitable positive integer $r$.
+

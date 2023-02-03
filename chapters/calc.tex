@@ -1,11 +1,80 @@
 %!TEX root = ../main.tex
-\section{Calculus of real valued functions}
+\section{Calculus in $\texorpdfstring{\R^n}{Rn}$}
 
-\subsection{Functions of a single variable}
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\subsection{Critical points and extreme values}
+Throughout this section let $f : D \subseteq \R^n \to \R$ be a function.
 
-\subsection{Functions of a several variables}
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\begin{ndfn}[Global minimum]
+  The function $f$ has a global minimum at $a \in D$ if $f(a) \leq f(x)$, for all $x \in D$.
+\end{ndfn}
+\begin{ndfn}[Local minimum]
+  The function $f$ has a local minimum at $a \in D$ if there is an open set $U \subseteq D$, with $a \in U$, such that $f(a) \leq f(x)$, for all $x \in U$.
+\end{ndfn}
+\begin{ndfn}[Maximum]
+  The function $f$ has a local (global) maximum at $a \in D$, if $-f$ has a local (global) minimum at $a$.
+\end{ndfn}
+We use the word \emph{extremum} to mean either the maximum or the minimum.
 
-\subsection{Other}
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Global extrema might not exist, and, in general, it is difficult to find them. Instead, we focus mainly on the local extremas.
+\begin{nprop}
+  If $f$ has a global minimum (maximum) at $a \in D$, then it has a local minimum (maximum) at $a$.
+\end{nprop}
+
+\begin{ndfn}[Critical points]
+  Let $f$ be at least $C^1$. We say that $a \in D$ is a critical point of $f$, if $f'(a) = 0$.
+\end{ndfn}
+Note that we have not defined critical points for functions that are not differentiable, or whose first derivative is not continuous. Similarly, we have ignored the complications due to boundary points.
+\begin{nthm}
+\label{thm:extremum-critical}
+  Let $f$ be at least $C^1$. If $f$ has an extremum at $a \in D$, then $a$ is a critical point of $f$; that is $f'(a)=0$.
+\end{nthm}
+
+\subsection{Convex functions}
+The converse of theorem~\ref{thm:extremum-critical} is not true in general. For example, a critical point can be a point of inflection or a saddle point, rather than being an extremum. If the function satisfies some additional properties then we can obtain more precise information about the extrema by studying only the critical points.
+\begin{ndfn}[Convex function]
+  A function $f:D \to \R$ is called convex if $D$ is a convex set, and $\forall x, y \in D$ and $\forall t \in (0,1)$,
+  \begin{equation}
+    (1-t) f(x) + t f(y) \geq f\left((1-t)x + ty\right).
+  \end{equation}
+  If the inequality is strict for all $t \in (0,1)$, then the function is called strictly convex.
+\end{ndfn}
+Convex functions have particularly nice properties for optimisation problems. The following results discuss some of these features.
+\begin{nprop}
+  Suppose $f$ is convex, and that it has an extremum at $a \in D$. Then, $f$ has a global minimum at $a \in D$.
+\end{nprop}
+\begin{nprop}
+  Suppose $f \in C^{1}$ is convex, and that $f'(a)=0$ for some $a \in U$. Then, $f'(x) \neq 0$ for all $x \neq a$. In other words, if there is a critical point then it is unique.
+\end{nprop}
+
+EXAMPLE: F NOT CONVEX, LOCAL MIN IS NOT GLOBAL MIN.
+
+
+\subsection{Fundamental Theorem of Calculus of Variations}
+Before proceeding with the analysis of varitational problems, we will study a very important result which is central in the derivation of the Euler-Lagrange equations.
+
+Consider a continuous function $f : [x_1, x_2] \to \R$ such that
+\begin{equation}
+  \label{eq:ftcv-motivation}
+  \int_{x_1}^{x_2} f(x) h(x) dx = 0
+\end{equation}
+for all the function $h \in C^{0}([x_1, x_2])$. Does this imply that $f(x)=0$ for all $x \in [x_1, x_2]$? By taking $h = f$, equation~\eqref{eq:ftcv-motivation} becomes $\int_{x_1}^{x_2} f(x)^2 dx = 0$. This is the integral of a non-negative continuous function, and therefore, we obtain that $f(x)=0$ for all $x \in [x_1, x_2]$ in this case. However, what happens when the \emph{test functions} $h(x)$ are restricted to a smaller set, such as $C^{2}$, or when there are boundary conditions on $h(x)$?
+
+The next result, known as the fundamental theorem of calculus of variations (FTCV), presents this generalisation.
+\begin{nthm}
+  \label{thm:ftcv}
+  Let $x_1 < x_2$ and $k \in \N$.
+\end{nthm}
+\begin{proof}
+  TBC.
+\end{proof}
+
+ABOUT THE TEST FUNCTION.
+
+ABOUT C-INFINITY TEST FUNCTIONS.
+
+There are several versions of FTCV, with slight modifications. The version presented in theorem~\ref{thm:ftcv} will be sufficient for us. For reference, a more general result is given below.
+\begin{nthm}
+  \label{thm:ftcv-supp}
+  Let $x_1 < x_2$ and $k \in \N$.
+\end{nthm}
+This version of FTCV implies theorem~\ref{thm:ftcv}, because it is based on a stirctly smaller set of assumptions.
