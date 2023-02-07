@@ -30,7 +30,7 @@ Note that we have not defined critical points for functions that are not differe
 \end{nthm}
 
 \subsection{Convex functions}
-The converse of theorem~\ref{thm:extremum-critical} is not true in general. For example, a critical point can be a point of inflection or a saddle point, rather than being an extremum. If the function satisfies some additional properties then we can obtain more precise information about the extrema by studying only the critical points.
+The converse of theorem~(\ref{thm:extremum-critical}) is not true in general. For example, a critical point can be a point of inflection or a saddle point, rather than being an extremum. If the function satisfies some additional properties then we can obtain more precise information about the extrema by studying only the critical points.
 \begin{ndfn}[Convex function]
   A function $f:D \to \R$ is called convex if $D$ is a convex set, and $\forall x, y \in D$ and $\forall t \in (0,1)$,
   \begin{equation}
@@ -57,24 +57,40 @@ Consider a continuous function $f : [x_1, x_2] \to \R$ such that
   \label{eq:ftcv-motivation}
   \int_{x_1}^{x_2} f(x) h(x) dx = 0
 \end{equation}
-for all the function $h \in C^{0}([x_1, x_2])$. Does this imply that $f(x)=0$ for all $x \in [x_1, x_2]$? By taking $h = f$, equation~\eqref{eq:ftcv-motivation} becomes $\int_{x_1}^{x_2} f(x)^2 dx = 0$. This is the integral of a non-negative continuous function, and therefore, we obtain that $f(x)=0$ for all $x \in [x_1, x_2]$ in this case. However, what happens when the \emph{test functions} $h(x)$ are restricted to a smaller set, such as $C^{2}$, or when there are boundary conditions on $h(x)$?
+for all the functions $h \in C^{0}([x_1, x_2])$. Does this imply that $f(x)=0$ for all $x \in [x_1, x_2]$? By taking $h = f$, equation~\eqref{eq:ftcv-motivation} becomes $\int_{x_1}^{x_2} f(x)^2 dx = 0$. This is the integral of a non-negative continuous function, and therefore, we obtain that $f(x)=0$ for all $x \in [x_1, x_2]$ in this case. However, what happens when the `test functions' $h(x)$ are restricted to a smaller set, such as $C^{2}$, or when there are boundary conditions on $h(x)$?
 
 The next result, known as the fundamental theorem of calculus of variations (FTCV), presents this generalisation.
-\begin{nthm}
+\begin{nthm}[FTCV version I]
   \label{thm:ftcv}
-  Let $x_1 < x_2$ and $k \in \N$.
+  Let $x_1 < x_2$ and $k \in \N$. If $f : [x_1, x_2] \to \R$ is a continuous function such that
+  \begin{equation}
+    \label{eq:ftcv}
+    \int_{x_1}^{x_2} f(x) h(x) dx = 0
+  \end{equation}
+  for every function $h \in C^{k}([x_1, x_2])$ with $h(x_1)=h(x_2)=0$, then $f(x)=0$ for all $x \in [x_1, x_2]$.
 \end{nthm}
 \begin{proof}
   TBC.
 \end{proof}
 
-ABOUT THE TEST FUNCTION.
+\begin{nex}
+  Prove that the function $h_0$ given above is $C^{k}$.
+\end{nex}
 
-ABOUT C-INFINITY TEST FUNCTIONS.
+The test functions $h$ can also be restricted to the set $C^{\infty}$. The theorem still holds, and the proof remains exactly the same, but we need to chance $h_0$ so that it is infinitely differentiable. One one choice is
+\begin{equation}
+  h_0(x) = \begin{cases}\exp(-1/(1-x^2)), & x \in (-1,1)\\ 0, &\text{otherwise}\end{cases}
+\end{equation}
+This function can also be used in the previous proof.
 
-There are several versions of FTCV, with slight modifications. The version presented in theorem~\ref{thm:ftcv} will be sufficient for us. For reference, a more general result is given below.
-\begin{nthm}
+There are several versions of FTCV, with slight modifications. The version presented in theorem~(\ref{thm:ftcv}) will be sufficient for us. For reference, a more general result is given below.
+\begin{nthm}[FTCV version II]
   \label{thm:ftcv-supp}
-  Let $x_1 < x_2$ and $k \in \N$.
+  If $f : [x_1, x_2] \to \R$ is a continuous function such that
+  \begin{equation}
+    \label{eq:ftcv}
+    \int_{x_1}^{x_2} f(x) h(x) dx = 0
+  \end{equation}
+  for every function $h \in C^{\infty}([x_1, x_2])$ with $\supp h \subset (x_1, x_2)$, then $f(x)=0$ for all $x \in [x_1, x_2]$.
 \end{nthm}
-This version of FTCV implies theorem~\ref{thm:ftcv}, because it is based on a stirctly smaller set of assumptions.
+This version of FTCV implies theorem~(\ref{thm:ftcv}), because it is based on a stirctly smaller set of assumptions.

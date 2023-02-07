@@ -1,6 +1,37 @@
 %!TEX root = ../main.tex
 \section{Euler-Lagrange equations}
-$\Lag(x,y,y')$, $\Lag(x,y,y',...,yn)$, first integrals, and the definition of $\Ham$, $\Lag(x,yi,yi')$, $\Lag(x1,x2,y,y')$.
 
-\subsection{This type}
-Let $y=y(x)$ be a $C^{2}$ function of a single variable $x$, and consider the function $f(x, y, y'')$.
+\subsection{Integrands with only the first derivative}
+Consider the functional
+\begin{equation}
+    S[y] = \int_{x_1}^{x_2} f(x, y(x), y'(x)) dx
+    \label{eq:functional-simplest}
+\end{equation}
+with $f \in C^2$ and $y \in C^2$, and $y(x_1)=y_1, y(x_2)=y_2$. The choice of regularity classes of $f$ and $y$ might appear odd; certainly we only need $f \in C^{0}$ and $y \in C^{1}$ for the equation~\eqref{eq:functional-simplest} to be well-defined. However, later we shall be differentiating $S$, and then the selection of these classes will become clearer.
+
+The function $S$, depends on a sinlge dependent variable $y$. A critical point of $S$ will be a function $y$ that satisfies the boundary conditions, and is sufficietly smooth. The integrand $f$ depends on three variables, and we shall treat them independently from each other.
+
+PROCEDURE.
+
+This is an ordinary differential equation with order (at most) two. This can be seen from expanding the derivative with respect to $x$. PROCEDURE.
+
+To recap this derivative, note that we started by posing the problem and assuming that a critical point $y$ exists. Then, we constructed a suitable class of test functions, $u$, and an auxiliary function $g_u$ that studies the functional around this critical point. By applying results from standard calculus in $\R^n$, and the given boundary conditions, we were able to transform the integrand to a form where the fundamental theorem of calculus of variations can be used. FTCV then allowed us to extract a differential equation from this integrand.
+
+Through this procedure, we have converted the variational problem into an ODE with boundary conditions. The solution of this ODE will be a critical point of the functional. We can determine the nature of each critical point (if any) by substituting it back into the functional. Alternatively, we can perform a \emph{second variation of the functional} and study its behaviour. This route is analogous to the second derivative test from the standard calculus.
+
+EXAMPLE.
+
+EXAMPLE.
+
+\subsection{Elementary analysis of the EL equations}
+
+Briefly introduce first integrals. We will return to these in a later chapter.
+
+\subsection{Higher derivatives}
+TBC
+
+\subsection{Multiple dependent variables}
+TBC
+
+\subsection{Multiple independent variables}
+TBC
