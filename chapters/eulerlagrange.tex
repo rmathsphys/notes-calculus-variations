@@ -1,31 +1,111 @@
 %!TEX root = ../main.tex
 \section{Euler-Lagrange equations}
 
-\subsection{Integrands with only the first derivative}
-Consider the functional
+\newcommand{\yt}{\tilde{y}}
+
+\subsection{Some variational problems}
+The Brachistochrone, optical path, geodesics, classical mechanics.
+
+\subsection{Derivation of the Euler-Lagrange equations}
+Take $(x_1, y_1), (x_2, y_2) \in \R^2$, with $x_1 < x_2$. Let $f \in C^{2}(\R^3)$ be a known function. The requirement that $f$ should be $C^2$ will become clearer later; having $\R^3$ as the domain of $f$ simply means that $f$ takes three real-valued inputs (which we treat as independent).
+
+Consider the following variational problem:
+
+\begin{problem}
+Find an extremum\footnote{This will be some function $y(x)$ that satisfies the imposed regularity and boundary conditions.} of the functional
 \begin{equation}
-    S[y] = \int_{x_1}^{x_2} f(x, y(x), y'(x)) dx
+    I[y] = \int_{x_1}^{x_2} f(x, y(x), y'(x)) dx
     \label{eq:functional-simplest}
 \end{equation}
-with $f \in C^2$ and $y \in C^2$, and $y(x_1)=y_1, y(x_2)=y_2$. The choice of regularity classes of $f$ and $y$ might appear odd; certainly we only need $f \in C^{0}$ and $y \in C^{1}$ for the equation~\eqref{eq:functional-simplest} to be well-defined. However, later we shall be differentiating $S$, and then the selection of these classes will become clearer.
+on the set of functions $y \in C^{2}([x_1, x_2])$ with $y(x_1)=y_1, y(x_2)=y_2$.
+\end{problem}
 
-The function $S$, depends on a sinlge dependent variable $y$. A critical point of $S$ will be a function $y$ that satisfies the boundary conditions, and is sufficietly smooth. The integrand $f$ depends on three variables, and we shall treat them independently from each other.
+It is possible that such an extremum might not even exist. We shall explore this case later. Similarly, if an extremum exists then we don't known a priori if it is unique or of there are other extrema also. Moreover, currently we are not looking for a minimum (or a maximum), but only an extremum.
 
-PROCEDURE.
+We begin solving this problem by supposing that a solution exists. For concreteness, assume that it is a minimum: that is, let $y(x)$ be a $C^2$ function satisfying the given boundary conditions that minimises the functional~\eqref{eq:functional-simplest}.
 
-This is an ordinary differential equation with order (at most) two. This can be seen from expanding the derivative with respect to $x$. PROCEDURE.
+Now, we vary $y$ slightly while keeping its end points fixed. More precisely, we consider the function $\tilde{y}(x) = y(x) + hu(x)$, with $h \in \R$ sufficiently small, and $u \in C^{2}([x_1, x_2])$ with $u(x_1)=u(x_2)=0$. Then,
+\begin{equation}
+    I[y] \leq I[\yt] \equiv I[y+hu], \quad\forall h\text{ in some interval containing $0$,}
+\end{equation}
+since $y$ is a minimum of~\eqref{eq:functional-simplest}. It is easy to check that $\yt \in C^{2}([x_1, x_2])$ also, and that $\yt(x_1)=y_1$, $\yt(x_2)=y_2$. Observe that $\yt' = y' + hu'$.
 
-To recap this derivative, note that we started by posing the problem and assuming that a critical point $y$ exists. Then, we constructed a suitable class of test functions, $u$, and an auxiliary function $g_u$ that studies the functional around this critical point. By applying results from standard calculus in $\R^n$, and the given boundary conditions, we were able to transform the integrand to a form where the fundamental theorem of calculus of variations can be used. FTCV then allowed us to extract a differential equation from this integrand.
+Let $g_u : \R \to \R$ be defined as $g_{u}(h) = I[y+hu] \equiv I[\yt]$. Then, $g_{u}(0) = I[y]$. So, $g_{u}(0) \leq g_{u}(h)$, for all sufficiently small $h$. In other words, $g_u$ has a minimum (i.e. an extremum) at $h=0$. Therefore, $g'_{u}(0) = 0$.
 
-Through this procedure, we have converted the variational problem into an ODE with boundary conditions. The solution of this ODE will be a critical point of the functional. We can determine the nature of each critical point (if any) by substituting it back into the functional. Alternatively, we can perform a \emph{second variation of the functional} and study its behaviour. This route is analogous to the second derivative test from the standard calculus.
+So far we have seen that if $y$ minimises $I$ then $g'_{u}(0) = 0$.
+
+Now,
+\begin{equation}
+    g_{u}(h) = \int_{x_1}^{x_2} f\left(x, y(x)+hu(x), y'(x)+hu'(x)\right) dx = \int_{x_1}^{x_2} f\left(x, \yt(x), \yt'(x)\right) dx.
+    \label{eq:el-deriv-a}
+\end{equation}
+Therefore,
+\begin{align}
+    g'_{u}(h) &= \int_{x_1}^{x_2} \frac{d}{dh} \left( f\left(x, \yt(x), \yt'(x)\right) \right) dx\\
+    &= \int_{x_1}^{x_2} \left( \frac{\pd f}{\pd x} \frac{dx}{dh} + \frac{\pd f}{\pd \yt} \frac{d\yt}{dh} + \frac{\pd f}{\pd \yt'} \frac{d\yt'}{dh} \right) dx\\
+    &= \int_{x_1}^{x_2} \left( u(x) \frac{\pd f}{\pd \yt} + u'(x) \frac{\pd f}{\pd \yt'} \right) dx
+    \label{eq:el-deriv-b}
+\end{align}
+Then,
+\begin{equation}
+    g'_{u}(0) = \left.\frac{dg_u}{dh}\right|_{h=0} = \int_{x_1}^{x_2} \left( u(x) \frac{\pd f}{\pd y} + u'(x) \frac{\pd f}{\pd y'} \right) dx.
+    \label{eq:el-deriv-c}
+\end{equation}
+For technical clarity, note that the factors $\pd f / \pd y$ and $\pd f / \pd y'$ are short for
+\begin{equation}
+    \frac{\pd f}{\pd y} (x, y, y') \quad\text{and}\quad \frac{\pd f}{\pd y'} (x, y, y'),
+\end{equation}
+respectively. Integrating the second term in~\eqref{eq:el-deriv-c} by parts gives us
+\begin{align}
+    \int_{x_1}^{x_2} u'(x) \frac{\pd f}{\pd y'} dx
+    &= \left. u(x) \frac{\pd f}{\pd y'} \right|_{x_1}^{x_2} - \int_{x_1}^{x_2} u(x) \frac{d}{dx}\left(\frac{\pd f}{\pd y'}\right) dx\\
+    &= u(x_2) \frac{\pd f}{\pd y'} - u(x_1) \frac{\pd f}{\pd y'} - \int_{x_1}^{x_2} u(x) \frac{d}{dx}\left(\frac{\pd f}{\pd y'}\right) dx\\
+    &= - \int_{x_1}^{x_2} u(x) \frac{d}{dx}\left(\frac{\pd f}{\pd y'}\right) dx.
+\end{align}
+Therefore, equation~\eqref{eq:el-deriv-c} becomes
+\begin{equation}
+    g'_{u}(0)
+    = \int_{x_1}^{x_2} \left( u(x) \frac{\pd f}{\pd y} - u(x) \frac{d}{dx}\left(\frac{\pd f}{\pd y'}\right) \right) dx
+    = \int_{x_1}^{x_2} u(x) \left( \frac{\pd f}{\pd y} - \frac{d}{dx}\left(\frac{\pd f}{\pd y'}\right) \right) dx.
+\end{equation}
+Consequently,
+\begin{equation}
+    g'_{u}(0) = 0 \implies \int_{x_1}^{x_2} u(x) \left( \frac{\pd f}{\pd y} - \frac{d}{dx}\left(\frac{\pd f}{\pd y'}\right) \right) dx
+\end{equation}
+for all $u \in C^2$, with $u(x_1) = u(x_2) = 0$. Using the fundamental theorem of calculus of variations we conclude that
+\begin{equation}
+    \frac{\pd f}{\pd y} - \frac{d}{dx}\left(\frac{\pd f}{\pd y'}\right) = 0.
+    \label{eq:el-final-simple}
+\end{equation}
+At this point, we have established that if $y$ minimises $I$, then $y$ satisfies the equation~\eqref{eq:el-final-simple}.
+
+Equation~\eqref{eq:el-final-simple} is called the Euler-Lagrange equation associated to the variation problem with the functional~\eqref{eq:functional-simplest}.
+
+\begin{remark}
+    If we had assumed that the extremum $y$ maximises $I$, then we would have still obtained $g_{u}(0)=0$, leading to the same Euler-Lagrange equation. This can be seen most easily by replicating the above derivation with the assumption that $y$ maximises the given functional. This also suggests that if a function $y$ satisfies some Euler-Lagrange equations, then we can't in general conclude that it must be a minimum of the associated functional.
+\end{remark}
+
+The proceeding analysis is formalised in the following theorem
+\begin{nthm}
+    THM
+\end{nthm}
+
+In additional to the remark above, note that it is possible that a function $y$ might satisfy some Euler-Lagrange equations, but still not be an extremum of the associated functional. This is analogous to situation in real analysis where not every critical point is an extremum of the function. This observation motivates the following terminology.
+\begin{ndfn}
+    EXTREMUM OF A FUNCTIONAL.
+\end{ndfn}
+\begin{ndfn}
+    CRITICAL POINT OF A FUNCTIONAL.
+\end{ndfn}
 
 EXAMPLE.
 
 EXAMPLE.
 
 \subsection{Elementary analysis of the EL equations}
-
 Briefly introduce first integrals. We will return to these in a later chapter.
+
+% Through this procedure, we have converted the variational problem into an ODE with boundary conditions. The solution of this ODE will be a critical point of the functional. We can determine the nature of each critical point (if any) by substituting it back into the functional. Alternatively, we can perform a \emph{second variation of the functional} and study its behaviour. This route is analogous to the second derivative test from the standard calculus.
 
 \subsection{Higher derivatives}
 TBC

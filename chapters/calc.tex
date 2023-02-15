@@ -15,7 +15,7 @@ Throughout this section let $f : D \subseteq \R^n \to \R$ be a function.
 \end{ndfn}
 We use the word \emph{extremum} to mean either the maximum or the minimum.
 
-Global extrema might not exist, and, in general, it is difficult to find them. Instead, we focus mainly on the local extremas.
+Global extrema might not exist, and, in general, it is difficult to find them. Instead, we focus mainly on the local extrema.
 \begin{nprop}
   If $f$ has a global minimum (maximum) at $a \in D$, then it has a local minimum (maximum) at $a$.
 \end{nprop}
@@ -50,7 +50,7 @@ EXAMPLE: F NOT CONVEX, LOCAL MIN IS NOT GLOBAL MIN.
 
 
 \subsection{Fundamental Theorem of Calculus of Variations}
-Before proceeding with the analysis of varitational problems, we will study a very important result which is central in the derivation of the Euler-Lagrange equations.
+Before proceeding with the analysis of variational problems, we will study a very important result which is central in the derivation of the Euler-Lagrange equations.
 
 Consider a continuous function $f : [x_1, x_2] \to \R$ such that
 \begin{equation}
@@ -88,9 +88,8 @@ There are several versions of FTCV, with slight modifications. The version prese
   \label{thm:ftcv-supp}
   If $f : [x_1, x_2] \to \R$ is a continuous function such that
   \begin{equation}
-    \label{eq:ftcv}
     \int_{x_1}^{x_2} f(x) h(x) dx = 0
   \end{equation}
   for every function $h \in C^{\infty}([x_1, x_2])$ with $\supp h \subset (x_1, x_2)$, then $f(x)=0$ for all $x \in [x_1, x_2]$.
 \end{nthm}
-This version of FTCV implies theorem~(\ref{thm:ftcv}), because it is based on a stirctly smaller set of assumptions.
+This version of FTCV implies theorem~(\ref{thm:ftcv}), because it is based on a strictly smaller set of assumptions.
